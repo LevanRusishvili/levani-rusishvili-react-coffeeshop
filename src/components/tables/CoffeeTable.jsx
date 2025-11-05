@@ -8,11 +8,11 @@ const CoffeeTable = () => {
   const navigate = useNavigate();
 
   const handleView = (coffee) => {
-    navigate("/coffee-details", { state: { coffee } });
+    navigate("/admin/coffee-details", { state: { coffee } });
   };
 
   const handleEdit = (coffee) => {
-    navigate("/edit-coffee", { state: { coffee } });
+    navigate("/admin/edit-coffee", { state: { coffee } });
   };
 
   const handleDelete = (id) => {

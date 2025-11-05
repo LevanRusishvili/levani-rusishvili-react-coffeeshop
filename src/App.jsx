@@ -2,14 +2,31 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import { CoffeeProvider } from "./context/CoffeeContext";
 import Navbar from "./components/layout/Navbar"; // Make sure this path is correct
 import Dashboard from "./pages/Dashboard";
-1;
+
 import AddCoffee from "./pages/AddCoffee";
 import Ingredients from "./pages/Ingredients";
 import EditCoffee from "./pages/EditCoffee";
 import CoffeeDetails from "./pages/CoffeeDetails";
+
+import CoffeeMenu from "./pages/client/CoffeeMenu";
+import ClientNavbar from "./components/layout/ClientNavbar";
+import Cart from "./pages/client/Cart";
+import ClientCoffeeDetails from "./pages/client/ClientCoffeeDetails";
+import { CartContext, CartContextProvider } from "./context/client/CartContext";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <ClientNavbar />,
+  
+         children: [
+      { index: true, element: <CoffeeMenu /> },
+      {path: "/cart", element: <Cart/>},
+      {path: "/details", element: <ClientCoffeeDetails/>},
+
+    ],
+  },
+  {
+    path: "/admin",
     element: (
       <div className="app-container">
         <Navbar />
@@ -26,11 +43,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+
 const App = () => {
   return (
+    <CartContextProvider>
     <CoffeeProvider>
       <RouterProvider router={router} />
     </CoffeeProvider>
+    </CartContextProvider>
   );
 };
 

@@ -16,7 +16,10 @@ const CoffeeDetails = () => {
       <div className="page-container">
         <div className="error-state">
           <h2>Coffee not found</h2>
-          <Button variant="primary" onClick={() => navigate("/dashboard")}>
+          <Button
+            variant="primary"
+            onClick={() => navigate("/admin/dashboard")}
+          >
             Back to Dashboard
           </Button>
         </div>
@@ -25,14 +28,14 @@ const CoffeeDetails = () => {
   }
 
   const handleEditCoffee = () => {
-    navigate("/edit-coffee", { state: { coffee } });
+    navigate("/admin/edit-coffee", { state: { coffee } });
   };
 
   return (
     <div className="page-container">
       <div className="page-header">
         <h1>{coffee.name} Details</h1>
-        <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+        <Button variant="secondary" onClick={() => navigate("/admin/dashboard")}>
           Back to Dashboard
         </Button>
       </div>
@@ -111,7 +114,7 @@ const CoffeeDetails = () => {
                 window.confirm("Are you sure you want to delete this coffee?")
               ) {
                 // You might need to add delete function here or navigate back
-                navigate("/dashboard");
+                navigate("/admin/dashboard");
               }
             }}
           >

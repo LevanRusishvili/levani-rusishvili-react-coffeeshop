@@ -12,13 +12,13 @@ const Navbar = () => {
           <p>Management Panel</p>
         </div>
         <nav className="navbar-menu">
-          <Link to="/dashboard" className="nav-link">
+          <Link to="/admin/dashboard" className="nav-link">
             Dashboard
           </Link>
-          <Link to="/add-coffee" className="nav-link">
+          <Link to="/admin/add-coffee" className="nav-link">
             Add Coffee
           </Link>
-          <Link to="/ingredients" className="nav-link">
+          <Link to="/admin/ingredients" className="nav-link">
             Manage Ingredients
           </Link>
         </nav>

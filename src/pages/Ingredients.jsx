@@ -106,7 +106,10 @@ const Ingredients = () => {
     <div className="page-container">
       <div className="page-header">
         <h1>Manage Ingredients</h1>
-        <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+        <Button
+          variant="secondary"
+          onClick={() => navigate("/admin/dashboard")}
+        >
           Back to Dashboard
         </Button>
       </div>

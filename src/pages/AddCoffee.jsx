@@ -45,7 +45,7 @@ const AddCoffee = () => {
       price: parseFloat(formData.price),
       ingredients: formData.ingredients,
     });
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   };
 
   const handleChange = (e) => {
@@ -64,7 +64,7 @@ const AddCoffee = () => {
     <div className="page-container">
       <div className="page-header">
         <h1>Add New Coffee</h1>
-        <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+        <Button variant="secondary" onClick={() => navigate("/admin/dashboard")}>
           Back to Dashboard
         </Button>
       </div>

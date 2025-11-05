@@ -51,7 +51,7 @@ const EditCoffee = () => {
       });
     }
 
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   };
 
   const handleChange = (e) => {
@@ -70,7 +70,7 @@ const EditCoffee = () => {
     <div className="page-container">
       <div className="page-header">
         <h1>{coffeeToEdit ? "Edit Coffee" : "Add New Coffee"}</h1>
-        <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+        <Button variant="secondary" onClick={() => navigate("/admin/dashboard")}>
           Back to Dashboard
         </Button>
       </div>

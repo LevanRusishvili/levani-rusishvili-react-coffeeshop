@@ -15,7 +15,7 @@ const Dashboard = () => {
         <h1>Coffee Dashboard</h1>
         <Button
           variant="primary"
-          onClick={() => navigate("/add-coffee")}
+          onClick={() => navigate("/admin/add-coffee")}
           disabled={loading}
         >
           {loading ? "Loading..." : "Add Coffee"}
