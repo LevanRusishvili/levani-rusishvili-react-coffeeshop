@@ -5,8 +5,6 @@ import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import IngredientsTable from "../components/tables/IngredientsTable";
 import "../styles/components/pages/ingredients.css";
-import "../styles/components/forms.css";
-import "../styles/components/tables.css";
 
 const Ingredients = () => {
   const { addIngredient, handleEditIngredient, ingredients } =
@@ -24,9 +22,7 @@ const Ingredients = () => {
   const [editingId, setEditingId] = useState(null);
   const [errors, setErrors] = useState({});
 
-  //------------------------for-form-submit----------------------------------------------------------
   const validate = () => {
-    //for errors
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.description.trim())
@@ -38,28 +34,25 @@ const Ingredients = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate(); //if errors, stop here
+    const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     if (editingId) {
-      // Update existing ingredient
       handleEditIngredient(editingId, {
         ...formData,
         price: parseFloat(formData.price),
       });
-      setEditingId(null); // Exit edit mode
+      setEditingId(null);
     } else {
-      // Add new ingredient
       addIngredient({
         ...formData,
         price: parseFloat(formData.price),
       });
     }
 
-    // Reset form after new ingredient gets added to the list
     setFormData({
       name: "",
       price: "",
@@ -68,14 +61,13 @@ const Ingredients = () => {
       flavor: "",
     });
   };
-  //----------------------------------------------------------------------------------
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // Add this function - handles edit button click
   const handleEdit = (id) => {
     const ingredientToEdit = ingredients.find((ing) => ing.id === id);
     if (ingredientToEdit) {
@@ -90,7 +82,6 @@ const Ingredients = () => {
     }
   };
 
-  // Add this function - cancel edit mode
   const handleCancelEdit = () => {
     setEditingId(null);
     setFormData({
@@ -103,25 +94,37 @@ const Ingredients = () => {
   };
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h1>Manage Ingredients</h1>
+    <div className="ingredients-page">
+      {/* Header */}
+      <div className="ingredients-header">
+        <div>
+          <h1>
+            <span className="header-icon">🥤</span>
+            Ingredients
+          </h1>
+          <p className="header-subtitle">Manage your coffee ingredients</p>
+        </div>
         <Button
           variant="secondary"
           onClick={() => navigate("/admin/dashboard")}
         >
-          Back to Dashboard
+          ← Back to Dashboard
         </Button>
       </div>
 
-      <div className="ingredients-container split-layout">
-        <div className={`ingredients-form ${editingId ? "editing" : ""}`}>
-          <h2>
-            {editingId ? "Edit Ingredient" : "Add New Ingredient"}
-            {editingId && <span className="edit-indicator">Editing Mode</span>}
-          </h2>
-          <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+      {/* Main Content */}
+      <div className="ingredients-layout">
+        {/* Form Card */}
+        <div className={`ingredients-form-card ${editingId ? "editing" : ""}`}>
+          <div className="form-card-header">
+            <h2>
+              {editingId ? <>✏️ Edit Ingredient</> : <>➕ Add New Ingredient</>}
+            </h2>
+            {editingId && <span className="editing-badge">Editing Mode</span>}
+          </div>
+
+          <form onSubmit={handleSubmit} className="ingredients-form">
+            <div className="form-grid">
               <Input
                 label="Ingredient Name"
                 name="name"
@@ -129,6 +132,7 @@ const Ingredients = () => {
                 onChange={handleChange}
                 error={errors.name}
                 required
+                placeholder="e.g., Arabica Beans"
               />
 
               <Input
@@ -141,49 +145,56 @@ const Ingredients = () => {
                 onChange={handleChange}
                 error={errors.price}
                 required
+                placeholder="0.00"
               />
+            </div>
 
-              <Input
-                label="Description"
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
                 name="description"
-                type="string"
                 value={formData.description}
                 onChange={handleChange}
-                error={errors.description}
-                required
+                className="form-textarea"
+                rows="3"
+                placeholder="Describe this ingredient..."
               />
+              {errors.description && (
+                <span className="error-message">{errors.description}</span>
+              )}
             </div>
 
-            <div className="form-group">
-              <label htmlFor="strength">Strength</label>
-              <select
-                id="strength"
-                name="strength"
-                value={formData.strength}
-                onChange={handleChange}
-                className="form-select"
-              >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Strength</label>
+                <select
+                  name="strength"
+                  value={formData.strength}
+                  onChange={handleChange}
+                  className="form-select"
+                >
+                  <option value="Low">🌱 Low</option>
+                  <option value="Medium">🌿 Medium</option>
+                  <option value="High">🌳 High</option>
+                </select>
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="flavor">Flavor Profile</label>
-              <input
-                id="flavor"
-                type="text"
-                name="flavor"
-                value={formData.flavor}
-                onChange={handleChange}
-                className="form-input"
-              />
+              <div className="form-group">
+                <label>Flavor Profile</label>
+                <input
+                  type="text"
+                  name="flavor"
+                  value={formData.flavor}
+                  onChange={handleChange}
+                  className="form-input"
+                  placeholder="e.g., Fruity, Nutty, Sweet"
+                />
+              </div>
             </div>
 
             <div className="form-actions">
               <Button type="submit" variant="primary">
-                {editingId ? "Update Ingredient" : "Add Ingredient"}
+                {editingId ? "✏️ Update Ingredient" : "➕ Add Ingredient"}
               </Button>
               {editingId && (
                 <Button
@@ -191,14 +202,19 @@ const Ingredients = () => {
                   variant="secondary"
                   onClick={handleCancelEdit}
                 >
-                  Cancel Edit
+                  Cancel
                 </Button>
               )}
             </div>
           </form>
         </div>
 
-        <div className="ingredients-list">
+        {/* Table Card */}
+        <div className="ingredients-table-card">
+          <div className="table-card-header">
+            <h2>🥤 Ingredients List</h2>
+            <span className="ingredient-count">{ingredients.length} total</span>
+          </div>
           <IngredientsTable onEdit={handleEdit} editingId={editingId} />
         </div>
       </div>

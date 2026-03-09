@@ -1,35 +1,142 @@
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
+/* Coffee Table Container */
+.coffee-table-container {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0e9e2;
+  overflow-x: auto;
+}
+
+/* Coffee Data Table */
+.coffee-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.coffee-data-table th {
+  text-align: left;
+  padding: 1rem;
+  color: #8a7a6a;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #f0e9e2;
+}
+
+.coffee-data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0e9e2;
+  color: #2c1810;
+  vertical-align: middle;
+}
+
+.coffee-data-table tr:hover td {
+  background: #faf7f2;
+}
+
+.coffee-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Image Cell */
+.image-cell {
+  width: 60px;
+}
+
+.table-coffee-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #f0e9e2;
+}
+
+/* Price Cell */
+.price-cell {
+  font-weight: 700;
+  color: #8B4513;
+}
+
+/* Action Buttons */
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.table-action-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.table-action-btn.view {
+  background: #f0e9e2;
+  color: #2c1810;
+}
+
+.table-action-btn.view:hover {
+  background: #8B4513;
+  color: white;
+}
+
+.table-action-btn.edit {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.table-action-btn.edit:hover {
+  background: #f57c00;
+  color: white;
+}
+
+.table-action-btn.delete {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.table-action-btn.delete:hover {
+  background: #c62828;
+  color: white;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #8a7a6a;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #f0e9e2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .coffee-table-container {
+    padding: 1rem;
   }
-  
-  .data-table th {
-    background-color: #7a4f3d;
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-  }
-  
-  .data-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .data-table tr:hover {
-    background-color: #f9f5f2;
-  }
-  
+
   .actions-cell {
-    white-space: nowrap;
+    flex-direction: column;
   }
 
-  .coffee-image {
-    width: 400px;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    box-shadow: gray 2px 2px 6px;
+  .table-action-btn {
+    width: 100%;
+    justify-content: center;
   }
 
-  
+  .table-coffee-image {
+    width: 40px;
+    height: 40px;
+  }
+}

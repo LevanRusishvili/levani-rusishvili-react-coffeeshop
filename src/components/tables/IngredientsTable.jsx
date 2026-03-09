@@ -1,10 +1,8 @@
 import { useContext } from "react";
 import { CoffeeContext } from "../../context/CoffeeContext";
 import Button from "../common/Button";
-import "../../styles/components/tables.css";
 
 const IngredientsTable = ({ onEdit, editingId }) => {
-  // Add props here
   const { ingredients, deleteIngredient } = useContext(CoffeeContext);
 
   const handleDelete = (id) => {
@@ -13,12 +11,19 @@ const IngredientsTable = ({ onEdit, editingId }) => {
     }
   };
 
+  if (ingredients.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No ingredients yet. Add your first ingredient!</p>
+      </div>
+    );
+  }
+
   return (
     <div className="table-container">
       <table className="data-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Price</th>
             <th>Strength</th>
@@ -32,24 +37,33 @@ const IngredientsTable = ({ onEdit, editingId }) => {
               key={ingredient.id}
               className={editingId === ingredient.id ? "table-row-editing" : ""}
             >
-              <td>{ingredient.id}</td>
-              <td>{ingredient.name}</td>
+              <td>
+                <strong>{ingredient.name}</strong>
+              </td>
               <td>${ingredient.price.toFixed(2)}</td>
-              <td>{ingredient.strength}</td>
-              <td>{ingredient.flavor}</td>
-              <td className="actions-cell">
-                <Button
-                  variant="secondary"
-                  onClick={() => onEdit(ingredient.id)} // Use the onEdit prop
+              <td>
+                <span
+                  className={`strength-badge strength-${ingredient.strength.toLowerCase()}`}
                 >
-                  Edit
-                </Button>
-                <Button
-                  variant="danger"
+                  {ingredient.strength}
+                </span>
+              </td>
+              <td>
+                <span className="flavor-badge">{ingredient.flavor}</span>
+              </td>
+              <td className="actions-cell">
+                <button
+                  className="action-btn edit"
+                  onClick={() => onEdit(ingredient.id)}
+                >
+                  ✏️ Edit
+                </button>
+                <button
+                  className="action-btn delete"
                   onClick={() => handleDelete(ingredient.id)}
                 >
-                  Delete
-                </Button>
+                  🗑️ Delete
+                </button>
               </td>
             </tr>
           ))}

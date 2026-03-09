@@ -1,77 +1,304 @@
-/* Main container */
-.page-container {
-  padding: 2rem;
-  max-width: 1200px;
+.add-coffee-page {
+  max-width: 800px;
   margin: 0 auto;
-}
-
-/* Header section */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-/* Form layout */
-.form-container {
-  background: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-row {
+.add-coffee-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.add-coffee-header h1 {
+  font-size: 2.5rem;
+  color: #2c1810;
+  margin: 0 0 0.5rem 0;
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-/* Form elements */
-.form-group {
-  margin-bottom: 1.5rem;
-  flex: 1; /* For equal width in rows */
+.header-icon {
+  background: #8B4513;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  font-size: 1.5rem;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
+.add-coffee-header p {
+  color: #6b4f3c;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0e9e2;
+  color: #8a7a6a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+  background: #8B4513;
+  color: white;
+  box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
+}
+
+.step.completed .step-number {
+  background: #27ae60;
+  color: white;
+}
+
+.step span {
+  font-size: 0.9rem;
+  color: #6b4f3c;
   font-weight: 500;
 }
 
+.step-line {
+  width: 100px;
+  height: 2px;
+  background: #f0e9e2;
+  margin: 0 1rem;
+}
+
+.step-line.active {
+  background: #8B4513;
+}
+
+/* Form Steps */
+.form-step {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  border: 1px solid #f0e9e2;
+  margin-bottom: 2rem;
+}
+
+.form-step h2 {
+  color: #2c1810;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.step-hint {
+  color: #8a7a6a;
+  margin: -0.5rem 0 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* Textarea */
 .form-textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 1rem;
+  border: 2px solid #f0e9e2;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
   resize: vertical;
+  transition: all 0.3s ease;
 }
 
-.form-multiselect {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  min-height: 100px;
+.form-textarea:focus {
+  outline: none;
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
-.form-hint {
-  display: block;
-  margin-top: 0.5rem;
-  color: #666;
-  font-size: 0.875rem;
+/* Image Preview */
+.image-preview-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f4f0;
+  border-radius: 12px;
+  text-align: center;
 }
 
-/* Buttons */
-.form-actions {
+.image-preview-card img {
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.image-preview-card p {
+  margin: 0;
+  color: #6b4f3c;
+  font-size: 0.9rem;
+}
+
+/* Ingredients Selector */
+.ingredients-selector {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.ingredient-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.ingredient-option input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 1.2rem;
+  accent-color: #8B4513;
+}
+
+.ingredient-card-select {
+  flex: 1;
+  background: #f8f4f0;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.ingredient-option input[type="checkbox"]:checked + .ingredient-card-select {
+  border-color: #8B4513;
+  background: #fff1e6;
+}
+
+.ingredient-card-select h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2c1810;
+}
+
+.ingredient-card-select p {
+  margin: 0 0 0.75rem 0;
+  color: #6b4f3c;
+  font-size: 0.9rem;
+}
+
+.ingredient-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ingredient-tags span {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.tag-strength {
+  background: #2c3e50;
+  color: white;
+}
+
+.tag-flavor {
+  background: #27ae60;
+  color: white;
+}
+
+.tag-price {
+  background: #8B4513;
+  color: white;
+}
+
+.selected-count {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #27ae60;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  gap: 1rem;
   justify-content: flex-end;
   margin-top: 2rem;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+.submit-btn {
+  background: linear-gradient(135deg, #8B4513, #a55d3d) !important;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-coffee-page {
+    padding: 1rem;
+  }
+
+  .add-coffee-header h1 {
+    font-size: 2rem;
+  }
+
+  .progress-steps {
+    flex-wrap: wrap;
+  }
+
+  .step-line {
+    width: 50px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+  }
+
+  .form-navigation button {
+    width: 100%;
+  }
+}

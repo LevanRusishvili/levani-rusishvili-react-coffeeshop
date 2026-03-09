@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useCoffeeContext } from "../../context/CoffeeContext";
-import Button from "../common/Button";
 import "../../styles/components/tables.css";
 
 const CoffeeTable = () => {
@@ -21,95 +20,71 @@ const CoffeeTable = () => {
     }
   };
 
-  return (
-    <div>
-      <div className="table-container">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Origin</th>
-              <th>Caffeine</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coffees.map((coffee) => (
-              <tr key={coffee.id}>
-                <td>{coffee.id}</td>
-                <td>{coffee.name}</td>
-                <td>{coffee.origin}</td>
-                <td>{coffee.caffeine}</td>
-                <td>${coffee.price.toFixed(2)}</td>
-                <td className="actions-cell">
-                  <Button variant="primary" onClick={() => handleView(coffee)}>
-                    View
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => handleEdit(coffee)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(coffee.id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  if (coffees.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No coffees yet. Add your first coffee!</p>
       </div>
+    );
+  }
 
-      <div className="coffee-cards-container">
-        <div className="coffee-cards">
+  return (
+    <div className="coffee-table-container">
+      <table className="coffee-data-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Origin</th>
+            <th>Caffeine</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
           {coffees.map((coffee) => (
-            <div key={coffee.id} className="coffee-card">
-              <img
-                src={coffee.imageUrl}
-                alt={coffee.name}
-                className="coffee-image"
-                onError={(e) => {
-                  e.target.src =
-                    "https://via.placeholder.com/300x200/8B4513/FFFFFF?text=No+Image";
-                }}
-              />
-              <h3>{coffee.name}</h3>
-              <p className="coffee-description">{coffee.description}</p>
-              <div className="coffee-details">
-                <p>
-                  <strong>Origin:</strong> {coffee.origin}
-                </p>
-                <p>
-                  <strong>Caffeine:</strong> {coffee.caffeine}mg
-                </p>
-                <p>
-                  <strong>Price:</strong> ${coffee.price.toFixed(2)}
-                </p>
-              </div>
-              <div className="card-actions">
-                <Button variant="primary" onClick={() => handleView(coffee)}>
-                  View Details
-                </Button>
-                <Button variant="secondary" onClick={() => handleEdit(coffee)}>
-                  Edit
-                </Button>
-                <Button
-                  variant="danger"
+            <tr key={coffee.id}>
+              <td className="image-cell">
+                <img
+                  src={coffee.imageUrl}
+                  alt={coffee.name}
+                  className="table-coffee-image"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=100&h=100&fit=crop";
+                  }}
+                />
+              </td>
+              <td>
+                <strong>{coffee.name}</strong>
+              </td>
+              <td>{coffee.origin}</td>
+              <td>{coffee.caffeine}</td>
+              <td className="price-cell">${coffee.price.toFixed(2)}</td>
+              <td className="actions-cell">
+                <button
+                  className="table-action-btn view"
+                  onClick={() => handleView(coffee)}
+                >
+                  👁️ View
+                </button>
+                <button
+                  className="table-action-btn edit"
+                  onClick={() => handleEdit(coffee)}
+                >
+                  ✏️ Edit
+                </button>
+                <button
+                  className="table-action-btn delete"
                   onClick={() => handleDelete(coffee.id)}
                 >
-                  Delete
-                </Button>
-              </div>
-            </div>
+                  🗑️ Delete
+                </button>
+              </td>
+            </tr>
           ))}
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   );
 };
